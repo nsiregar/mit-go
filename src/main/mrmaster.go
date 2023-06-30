@@ -7,10 +7,13 @@ package main
 // go run mrmaster.go pg*.txt
 //
 
-import "mr"
-import "time"
-import "os"
-import "fmt"
+import (
+	"fmt"
+	"os"
+	"time"
+
+	"github.com/BLBT1/MIT-6.824-labs-my-solution/src/mr"
+)
 
 func main() {
 	if len(os.Args) < 2 {

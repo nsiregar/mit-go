@@ -6,13 +6,16 @@ package main
 // go run mrsequential.go ../mrapps/wc.so pg*.txt
 //
 
-import "fmt"
-import "mr"
-import "plugin"
-import "os"
-import "log"
-import "io/ioutil"
-import "sort"
+import (
+	"fmt"
+	"io/ioutil"
+	"log"
+	"os"
+	"plugin"
+	"sort"
+
+	"github.com/BLBT1/MIT-6.824-labs-my-solution/src/mr"
+)
 
 // for sorting by key.
 type ByKey []mr.KeyValue
@@ -86,10 +89,8 @@ func main() {
 	ofile.Close()
 }
 
-//
 // load the application Map and Reduce functions
 // from a plugin file, e.g. ../mrapps/wc.so
-//
 func loadPlugin(filename string) (func(string, string) []mr.KeyValue, func(string, []string) string) {
 	p, err := plugin.Open(filename)
 	if err != nil {

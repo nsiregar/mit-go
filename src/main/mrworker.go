@@ -8,11 +8,14 @@ package main
 // go run mrworker.go ../mrapps/wc.so
 //
 
-import "mr"
-import "plugin"
-import "os"
-import "fmt"
-import "log"
+import (
+	"fmt"
+	"log"
+	"os"
+	"plugin"
+
+	"github.com/BLBT1/MIT-6.824-labs-my-solution/src/mr"
+)
 
 func main() {
 	if len(os.Args) != 2 {
@@ -20,15 +23,13 @@ func main() {
 		os.Exit(1)
 	}
 
-	mapf, reducef := loadPlugin(os.Args[1])
+	mapf, reducef := loadPlugin(os.Args[1]) // get map and reduce functions from .so files
 
 	mr.Worker(mapf, reducef)
 }
 
-//
 // load the application Map and Reduce functions
 // from a plugin file, e.g. ../mrapps/wc.so
-//
 func loadPlugin(filename string) (func(string, string) []mr.KeyValue, func(string, []string) string) {
 	p, err := plugin.Open(filename)
 	if err != nil {

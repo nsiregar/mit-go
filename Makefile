@@ -48,3 +48,7 @@ LABS=" lab1 lab2a lab2b lab2c lab3a lab3b lab4a lab4b "
 	else \
 		echo "Bad target $@. Usage: make [$(LABS)]"; \
 	fi
+
+lab1_sequential:
+	go build -buildmode=plugin ../mrapps/wc.go
+	go run mrsequential.go wc.so pg*.txt
